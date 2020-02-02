@@ -26,11 +26,15 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-
-
-
-
-
+% 特征标准化：减去均值再除以标准差
+for i=1:size(X,2)   % 取X矩阵的第二个参数即X的列数（特征数）
+    % 计算mean
+    mu(1,i) = mean(X_norm(:,i));
+    % 计算标准差
+    sigma(1,i) = std(X_norm(:,i));
+    X_norm(:,i) = X_norm(:,i) - mu(i);
+    X_norm(:,i) = X_norm(:,i) / sigma(i);
+end
 
 
 
