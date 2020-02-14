@@ -77,7 +77,10 @@ h = a3;
 
 J = sum(sum((-yk).*log(h)'-(1-yk).*log(1-h)'))/m;
 
+theta1 = Theta1(:,2:end);
+theta2 = Theta2(:,2:end);
 
+J = J + lambda/(2*m)*(sum(sum(theta1.^2))+sum(sum(theta2.^2)));
 
 
 
