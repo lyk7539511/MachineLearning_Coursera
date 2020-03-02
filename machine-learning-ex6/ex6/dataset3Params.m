@@ -23,7 +23,28 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+tryValue = [0.01; 0.03; 0.1; 0.3; 1; 3; 10; 30];
+minError = 1;
 
+for i=1:length(tryValue)
+    for j=1:length(tryValue)
+        testC = tryValue(i);
+        testSigma = tryValue(j);
+        
+        % 训练模型
+        model = svmTrain(X,y,testC,@(x1,x2) gaussianKernel(x1,x2,testSigma));
+        % 使用训练好的模型预测
+        predictions = svmPredict(model,Xval);
+        % 计算误差
+        CVError = mean(double(predictions ~= yval));
+        % 找出误差最小的，更新C、sigma
+        if CVError < minError
+            minError = CVError;
+            C = testC;
+            sigma = testSigma;
+        end
+    end
+end
 
 
 
