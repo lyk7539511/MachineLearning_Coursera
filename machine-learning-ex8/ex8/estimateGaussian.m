@@ -21,10 +21,9 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
-
-
-
-
+mu = mean(X);
+% 方差默认计算方式是除以(m-1),1 是指定除以m
+sigma2 = var(X,1);
 
 
 
